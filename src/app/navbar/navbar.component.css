@@ -1,0 +1,56 @@
+.navbar {
+  background-color: #1B99B9;
+  font-family: "Trebuchet MS", "Arial", "sans-serif";
+}
+
+.custom-active {
+  background-color: rgba(255, 0, 0, 0.0);
+  border-style: solid;
+  border-color: white;
+  border-width: 2px;
+  border-radius: 5px;
+  font-weight: 400;
+  color: white;
+  padding-left: 5px;
+}
+
+.custom-active:hover {
+  background-color: white;
+  color: #1B99B9;
+}
+
+.custom-item {
+  background-color: rgba(255, 0, 0, 0.0);
+  color: #89d9ee;
+  font-weight: 600;
+  padding-left: 5px;
+}
+
+.custom-item:hover {
+  color: white;
+}
+
+.nav-link {
+  margin-left: 0.875rem;
+}
+
+.navbar-toggler {
+  border-style: solid;
+  border-color: white;
+  border-width: 2px;
+  border-radius: 5px;
+}
+
+.navbar-toggler-icon {
+  margin-top: 8px;
+  color: white;
+}
+
+.popover-body {
+
+  font-size: 14px;
+  color: #55555e;
+  background-color: #fff;
+  background-image: none;
+  
+}
