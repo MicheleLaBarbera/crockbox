@@ -13,6 +13,9 @@ import { AlertComponent } from './alert/alert.component';
 
 import { SignupService } from './_services/signup.service';
 import { AlertService } from './_services/alert.service';
+import { ModalService } from './_services/modal.service';
+import { UploadService } from './_services/upload.service';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,8 @@ import { AlertService } from './_services/alert.service';
     HomeComponent,
     NavbarComponent,
     SignupComponent,
-    AlertComponent
+    AlertComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,9 @@ import { AlertService } from './_services/alert.service';
   ],
   providers: [
     SignupService,
-    AlertService
+    AlertService,
+    ModalService,
+    UploadService
   ],
   bootstrap: [AppComponent]
 })

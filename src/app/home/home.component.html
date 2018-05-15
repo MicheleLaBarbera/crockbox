@@ -4,26 +4,14 @@
   <p class="h1">Condividere file non è mai stato così semplice!</p>
   <p class="h2">Carica e condividi file alla velocità della luce.</p>
 
-  <button type="button" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#uploadModal">Carica file &nbsp;<i class="fa fa-cloud-upload" aria-hidden="true"></i></button>
-</div>
-
-
-<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="uploadModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+  <div class="row mt-5">
+    <div class="col-md-4 col-sm-12"></div>
+    <div class="col-md-4 col-sm-12">
+        <app-modal></app-modal>
     </div>
   </div>
+
+  <button type="button" class="btn btn-primary btn-xl" (click)="addFiles()">Carica file &nbsp;<i class="fa fa-cloud-upload" aria-hidden="true"></i></button>
+
+  <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
 </div>
