@@ -13,5 +13,10 @@
 
   <button type="button" class="btn btn-primary btn-xl" (click)="addFiles()">Carica file &nbsp;<i class="fa fa-cloud-upload" aria-hidden="true"></i></button>
 
-  <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
+  <div *ngIf="!currentUser">
+    <input type="file" #file style="display: none" (change)="onUploadAnon()" multiple />
+  </div>
+  <div *ngIf="currentUser">
+    <input type="file" #file style="display: none" (change)="onUploadUser()" multiple />
+  </div>
 </div>

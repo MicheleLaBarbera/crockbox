@@ -13,5 +13,4 @@ export class SignupService {
   public signup(username: string, password: string): Observable<any> {
     return this.http.post<any>(this.signupUrl, JSON.stringify({username: username, password: password}));
   }
-
 }

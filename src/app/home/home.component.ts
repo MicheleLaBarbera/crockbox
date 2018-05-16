@@ -12,28 +12,53 @@ import { Observable } from 'rxjs/Observable';
 })
 export class HomeComponent implements OnInit {
 
+  currentUser: any;
   @ViewChild('file') file;
   public files: Set<File> = new Set();
 
-  constructor(private uploadService: UploadService, private modalService: ModalService) { }
+  constructor(private uploadService: UploadService, private modalService: ModalService) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
 
   ngOnInit() {
   }
 
-  onFilesAdded() {
+  onUploadAnon() {
     const files: { [key: string]: File } = this.file.nativeElement.files;
     for (let key in files) {
       if (!isNaN(parseInt(key))) {
         this.files.add(files[key]);
         var fileNameArray = files[key].name.split(".");
-        var fileExtension = '.' + fileNameArray[fileNameArray.length - 1];
-        var fileName = files[key].name.substring(0, files[key].name.length - fileExtension.length);
+        var fileExtension = fileNameArray[fileNameArray.length - 1];
+        var fileName = files[key].name.substring(0, files[key].name.length - (fileExtension.length + 1));
 
         this.fileReaderObs(files[key]).subscribe(fileContent => {
-          console.log(fileContent);
-          this.uploadService.uploadAnon(fileName, fileExtension, fileContent).subscribe(result => {
+          this.uploadService.uploadAnon(fileName, fileExtension, fileContent, files[key].size).subscribe(result => {
             if(result.status === 200) {
-              this.modalService.success("http://localhost/downloadFile/a82Sz8");
+              this.modalService.success("Upload Completato", "http://localhost:4200/download/" + result.id);
+            }
+            else {
+              console.log("Failed");
+            }
+          });
+        });
+      }
+    }
+  }
+
+  onUploadUser() {
+    const files: { [key: string]: File } = this.file.nativeElement.files;
+    for (let key in files) {
+      if (!isNaN(parseInt(key))) {
+        this.files.add(files[key]);
+        var fileNameArray = files[key].name.split(".");
+        var fileExtension = fileNameArray[fileNameArray.length - 1];
+        var fileName = files[key].name.substring(0, files[key].name.length - (fileExtension.length + 1));
+
+        this.fileReaderObs(files[key]).subscribe(fileContent => {
+          this.uploadService.uploadUser(this.currentUser.username, fileName, fileExtension, fileContent, files[key].size).subscribe(result => {
+            if(result.status === 200) {
+              this.modalService.success("Upload Completato", "http://localhost:4200/download/" + result.id);
             }
             else {
               console.log("Failed");
@@ -48,7 +73,6 @@ export class HomeComponent implements OnInit {
     let reader = new FileReader();
     let fileReaderObs = Observable.create((observer: any) => {
       reader.onload = function() {
-        console.log(reader.result)
         observer.next(btoa(reader.result));
         observer.complete();
       }

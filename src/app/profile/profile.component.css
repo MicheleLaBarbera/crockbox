@@ -1,0 +1,8 @@
+td {
+  color: #55555e;
+  font-size: 0.9rem;
+}
+
+.clickable {
+  cursor: pointer;
+}

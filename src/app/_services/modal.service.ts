@@ -22,14 +22,14 @@ export class ModalService {
     });
   }
 
-  success(message: string, keepAfterNavigationChange = false) {
+  success(title: string, message: string, readOnly = false, keepAfterNavigationChange = false) {
     this.keepAfterNavigationChange = keepAfterNavigationChange;
-    this.subject.next({ type: 'success', text: message });
+    this.subject.next({ type: 'success', title: title, text: message, readOnly: readOnly });
   }
 
-  error(message: string, keepAfterNavigationChange = false) {
+  error(title: string, message: string, readOnly = false, keepAfterNavigationChange = false) {
     this.keepAfterNavigationChange = keepAfterNavigationChange;
-    this.subject.next({ type: 'error', text: message });
+    this.subject.next({ type: 'error', title: title, text: message, readOnly: readOnly });
   }
 
   getMessage(): Observable<any> {
