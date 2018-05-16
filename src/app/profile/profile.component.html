@@ -5,14 +5,23 @@
     <div class="col-md-12 col-sm-12">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Files</h5>
-          <div class="card-text">
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <h5 class="card-title">Files</h5>
+            </div>
+            <div class="col-md-8 col-sm-12 text-right">
+              <button type="button" class="btn btn-primary mb-2" (click)="addFiles()">Carica file &nbsp;<i class="fa fa-cloud-upload" aria-hidden="true"></i></button>
+              <input type="file" #file style="display: none" (change)="onUploadUser()" multiple />
+            </div>
+          </div>
+          <div class="card-text" *ngIf="userFiles">
             <table class="table table-hover table-sm">
               <thead>
                 <tr>
                   <td><i class="fa fa-list-alt" aria-hidden="true"></i> Nome</td>
                   <td class="text-center"><i class="fa fa-balance-scale" aria-hidden="true"></i> Dimensione</td>
                   <td class="text-center"><i class="fa fa-calendar-o" aria-hidden="true"></i> Data Upload</td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -22,9 +31,18 @@
                   <td>{{file.name}}</td>
                   <td class="text-center">{{file.size}}</td>
                   <td class="text-center">{{file.uploaded_at}}</td>
-                  <td><i class="fa fa-link clickable" (click)="showLink(file.name, file.id)"></i></td>
-                  <!--<div id="popover-content" style="display:none;">http://localhost/file/{{file.link}}</div>-->
-                  <td><i class="fa fa-download" aria-hidden="true"></i></td>
+                  <td class="text-center">
+                  <i class="fa clickable" [ngClass]="{
+                    'fa-lock': file.is_link_generated == 0,
+                    'fa-globe': file.is_link_generated == 1
+                  }" aria-hidden="true" (click)="toggleState(file);"></i></td>
+                  <td class="text-center"><i class="fa fa-link clickable" (click)="showLink(file.name, file.id)"></i></td>
+                  <td class="text-center"><a href="http://localhost:4200/download/{{file.id}}"><i class="fa fa-download" aria-hidden="true"></i></a></td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="!userFiles">
+                <tr>
+                  <td>Non hai ancora caricato nessun file</td>
                 </tr>
               </tbody>
             </table>

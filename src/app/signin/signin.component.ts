@@ -23,6 +23,7 @@ export class SigninComponent implements OnInit {
 
   signin() {
     this.signinService.signin(this.model.username, this.model.password).subscribe(result => {
+      console.log(result);
       if(result.status === 200) {
         this.router.navigate([this.returnUrl]);
       }

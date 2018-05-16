@@ -6,3 +6,11 @@ td {
 .clickable {
   cursor: pointer;
 }
+
+.btn-primary {
+  background-color: #1da4c6;
+  border-style: solid;
+  border-color: white;
+  border-width: 2px;
+  border-radius: 5px;
+}
